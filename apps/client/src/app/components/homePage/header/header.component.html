@@ -79,10 +79,9 @@
         }
       </div>
 
-      <!-- Mobile Cart (Only) -->
-      <div class="d-flex align-items-center ms-auto me-2 d-lg-none">
-        <!-- Cart for Mobile -->
-        <a class="position-relative p-2 mx-1 rounded-circle action-button" routerLink="/cart-details" tooltip="Cart" placement="bottom">
+      <!-- Mobile Cart (Fixed Center) -->
+      <div class="header-center-section d-lg-none">
+        <a class="position-relative p-2 rounded-circle action-button cart-mobile" routerLink="/cart-details" tooltip="Cart" placement="bottom">
           <i class="bi bi-cart3 fs-5"></i>
           @if (cartItemCount > 0) {
           <span class="position-absolute counter translate-middle badge rounded-pill bg-danger">
@@ -91,6 +90,15 @@
           }
         </a>
       </div>
+
+      <!-- Mobile Notifications (Right) -->
+      @if (isAuthenticated) {
+      <div class="d-flex align-items-center ms-auto me-2 d-lg-none mobile-notification-container">
+        <div class="notification-wrapper notification-mobile">
+          <app-notification></app-notification>
+        </div>
+      </div>
+      }
 
       <!-- Mobile Toggle Button -->
       <button
@@ -124,22 +132,13 @@
               <span>Books</span>
             </a>
           </li>
-
-          <!-- Mobile Notifications (Only for authenticated users) -->
-          @if (isAuthenticated) {
-          <li class="nav-item d-block d-lg-none mt-2">
-            <div class="notification-mobile-wrapper px-3">
-              <app-notification></app-notification>
-            </div>
-          </li>
-          }
         </ul>
 
         <!-- Mobile-only User Account Section -->
         <div class="d-block d-lg-none">
           @if (isAuthenticated) {
           <!-- Mobile Account Links -->
-          <div class="mobile-account-links border-top pt-2 mt-2">
+          <div class="mobile-account-links pt-2">
             <p class="text-muted mb-1 small">Account</p>
             <a class="nav-link d-flex align-items-center rounded mb-1" routerLink="/account">
               <i class="bi bi-person-circle me-2"></i>
@@ -181,7 +180,7 @@
             </a>
           </div>
           } @else {
-          <div class="d-flex flex-column gap-2 mt-3 border-top pt-3">
+          <div class="d-flex flex-column gap-2 mt-3 pt-3">
             <a routerLink="/auth/login" class="btn btn-outline-primary w-100">Login</a>
             <a routerLink="/auth/signup" class="btn btn-primary w-100">Sign Up</a>
           </div>

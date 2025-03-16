@@ -82,15 +82,15 @@
 /* Active link styling */
 .navbar-nav .nav-link.active,
 .mobile-account-links .nav-link:hover {
-  background-color: rgba(58, 134, 255, 0.1); /* Light blue background using your primary color */
-  color: var(--primary-color); /* Use your primary color variable */
+  background-color: rgba(58, 134, 255, 0.1);
+  color: var(--primary-color);
   font-weight: 500;
   border-radius: 0.375rem;
 }
 
 .navbar-nav .nav-link.active i {
   color: var(--primary-color);
-  transform: scale(1.1); /* Slightly larger icon */
+  transform: scale(1.1);
 }
 
 /* Enhance regular nav links for better hover states */
@@ -102,7 +102,7 @@
 }
 
 .navbar-nav .nav-link:hover:not(.active) {
-  background-color: rgba(0, 0, 0, 0.05); /* Subtle hover effect for non-active links */
+  background-color: rgba(0, 0, 0, 0.05);
 }
 
 .nav-pointer {
@@ -150,19 +150,40 @@ button {
   z-index: 2;
 }
 
-/* Fix for notification component */
-.notification-wrapper {
-  position: relative;
-  z-index: 3;
+/* Center cart in the header fixed positioning */
+.header-center-section {
+  position: fixed;
+  top: 15px; /* Adjust as needed to vertically center in your header */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1050; /* Higher than navbar-collapse */
+  pointer-events: auto;
 }
 
-/* Mobile notification styling */
-.notification-mobile-wrapper {
+/* Notification styling */
+.notification-wrapper {
   position: relative;
-  z-index: 3;
-  /* Add some styling to make it align properly in the mobile menu */
-  padding-top: 0.25rem;
-  padding-bottom: 0.25rem;
+  z-index: 100;
+}
+
+/* Custom styles for notification dropdown menu in mobile */
+.notification-mobile ::ng-deep .dropdown-menu {
+  position: absolute !important;
+  top: 100% !important;
+  right: 0 !important;
+  left: auto !important;
+  transform: none !important;
+  max-width: 300px !important;
+  width: 90vw !important;
+  max-height: 80vh;
+  overflow-y: auto;
+  z-index: 1100 !important;
+  margin-top: 5px !important;
+}
+
+/* Container to ensure proper positioning context */
+.mobile-notification-container {
+  position: relative;
 }
 
 /* Mobile-specific styles */
@@ -170,6 +191,7 @@ button {
   .navbar-collapse {
     max-height: calc(100vh - 70px);
     overflow-y: auto;
+    position: relative;
   }
 
   .mobile-account-links {
@@ -180,7 +202,20 @@ button {
     margin-bottom: 0.25rem;
   }
 
-  /* Make the header more compact on very small screens */
+  /* Make sure the navbar has enough space */
+  .navbar {
+    position: relative;
+    min-height: 60px;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+
+  /* Ensure notification dropdown stays within viewport */
+  .notification-mobile ::ng-deep .dropdown-menu {
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+  }
+
+  /* Adjust brand size for small screens */
   @media (max-width: 360px) {
     .navbar-brand .brand-text {
       font-size: 1.25rem !important;
@@ -189,5 +224,30 @@ button {
     .navbar-brand .brand-icon {
       font-size: 1.5rem !important;
     }
+
+    /* Make cart a bit smaller on very small screens */
+    .cart-mobile {
+      padding: 0.15rem !important;
+    }
+
+    /* Adjust notification dropdown width for very small screens */
+    .notification-mobile ::ng-deep .dropdown-menu {
+      max-width: 250px !important;
+    }
   }
+}
+
+/* Make any notification dropdown child elements contained */
+::ng-deep .notification-mobile .dropdown-menu {
+  overflow-x: hidden;
+}
+
+/* Make sure the cart stands out */
+.cart-mobile {
+  background-color: rgba(58, 134, 255, 0.1);
+  border-radius: 50%;
+}
+
+.cart-mobile:hover {
+  background-color: rgba(58, 134, 255, 0.2);
 }
