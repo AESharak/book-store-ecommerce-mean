@@ -78,7 +78,7 @@ export class HeaderComponent implements OnInit {
   }
 
   closeMenu(): void {
-    if (window.innerWidth < 992) {
+    if (window.innerWidth < 991) {
       // Only close if in mobile view
       this.isCollapsed = true;
     }
