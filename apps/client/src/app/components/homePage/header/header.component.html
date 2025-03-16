@@ -81,7 +81,13 @@
 
       <!-- Mobile Cart (Fixed Center) -->
       <div class="header-center-section d-lg-none">
-        <a class="position-relative p-2 rounded-circle action-button cart-mobile" routerLink="/cart-details" tooltip="Cart" placement="bottom">
+        <a
+          class="position-relative p-2 rounded-circle action-button cart-mobile"
+          routerLink="/cart-details"
+          tooltip="Cart"
+          placement="bottom"
+          (click)="closeMenu()"
+        >
           <i class="bi bi-cart3 fs-5"></i>
           @if (cartItemCount > 0) {
           <span class="position-absolute counter translate-middle badge rounded-pill bg-danger">
@@ -121,13 +127,14 @@
               routerLink="/"
               routerLinkActive="active"
               [routerLinkActiveOptions]="{ exact: true }"
+              (click)="closeMenu()"
             >
               <i class="bi bi-house-door me-2"></i>
               <span>Home</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link d-flex align-items-center rounded" routerLink="/books-filters" routerLinkActive="active">
+            <a class="nav-link d-flex align-items-center rounded" routerLink="/books-filters" routerLinkActive="active" (click)="closeMenu()">
               <i class="bi bi-book me-2"></i>
               <span>Books</span>
             </a>
@@ -140,11 +147,11 @@
           <!-- Mobile Account Links -->
           <div class="mobile-account-links pt-2">
             <p class="text-muted mb-1 small">Account</p>
-            <a class="nav-link d-flex align-items-center rounded mb-1" routerLink="/account">
+            <a class="nav-link d-flex align-items-center rounded mb-1" routerLink="/account" (click)="closeMenu()">
               <i class="bi bi-person-circle me-2"></i>
               <span>My Profile</span>
             </a>
-            <a class="nav-link d-flex align-items-center rounded mb-1" routerLink="/orders-history">
+            <a class="nav-link d-flex align-items-center rounded mb-1" routerLink="/orders-history" (click)="closeMenu()">
               <i class="bi bi-box me-2"></i>
               <span>My Orders</span>
             </a>
@@ -152,15 +159,15 @@
             <!-- Admin Options -->
             @if (currentUser?.role === 'admin' || currentUser?.role === 'superAdmin') {
             <p class="text-muted mb-1 small mt-3">Admin Actions</p>
-            <a class="nav-link d-flex align-items-center rounded mb-1" routerLink="/books/add">
+            <a class="nav-link d-flex align-items-center rounded mb-1" routerLink="/books/add" (click)="closeMenu()">
               <i class="bi bi-plus-circle me-2"></i>
               <span>Add Book</span>
             </a>
-            <a class="nav-link d-flex align-items-center rounded mb-1" routerLink="/books/update">
+            <a class="nav-link d-flex align-items-center rounded mb-1" routerLink="/books/update" (click)="closeMenu()">
               <i class="bi bi-pencil-square me-2"></i>
               <span>Update Book</span>
             </a>
-            <a class="nav-link d-flex align-items-center rounded mb-1" routerLink="/books/delete">
+            <a class="nav-link d-flex align-items-center rounded mb-1" routerLink="/books/delete" (click)="closeMenu()">
               <i class="bi bi-trash me-2"></i>
               <span>Delete Book</span>
             </a>
@@ -169,8 +176,8 @@
             <hr />
             <a
               class="nav-link d-flex align-items-center rounded text-danger"
-              (click)="logUserOut()"
-              (keydown.enter)="logUserOut()"
+              (click)="logUserOutAndCloseMenu()"
+              (keydown.enter)="logUserOutAndCloseMenu()"
               tabindex="0"
               role="button"
               aria-label="Logout"
@@ -181,8 +188,8 @@
           </div>
           } @else {
           <div class="d-flex flex-column gap-2 mt-3 pt-3">
-            <a routerLink="/auth/login" class="btn btn-outline-primary w-100">Login</a>
-            <a routerLink="/auth/signup" class="btn btn-primary w-100">Sign Up</a>
+            <a routerLink="/auth/login" class="btn btn-outline-primary w-100" (click)="closeMenu()">Login</a>
+            <a routerLink="/auth/signup" class="btn btn-primary w-100" (click)="closeMenu()">Sign Up</a>
           </div>
           }
         </div>

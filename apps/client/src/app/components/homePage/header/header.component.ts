@@ -69,6 +69,7 @@ export class HeaderComponent implements OnInit {
     this.authService.logout().subscribe({
       next: () => {
         console.log('Logged out user successfully');
+        this.cartService.resetCart();
       },
       error: (err) => {
         console.error('Error during logout', err);
@@ -76,9 +77,18 @@ export class HeaderComponent implements OnInit {
     });
   }
 
-  // Toggle dark mode (optional feature)
-  toggleDarkMode() {
-    this.isDarkMode = !this.isDarkMode;
-    document.body.classList.toggle('dark-theme', this.isDarkMode);
+  closeMenu(): void {
+    if (window.innerWidth < 992) {
+      // Only close if in mobile view
+      this.isCollapsed = true;
+    }
+  }
+
+  /**
+   * Logs out the user and closes the menu
+   */
+  logUserOutAndCloseMenu(): void {
+    this.logUserOut();
+    this.closeMenu();
   }
 }
